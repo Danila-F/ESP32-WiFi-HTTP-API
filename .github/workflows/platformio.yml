@@ -24,3 +24,10 @@ jobs:
         run: pip install --upgrade platformio
       - name: Build firmware
         run: pio run
+      - name: Upload firmware artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: esp32-firmware-${{ github.sha }}
+          path: .pio/build/esp32dev/firmware.bin
+          if-no-files-found: error
+          retention-days: 30
